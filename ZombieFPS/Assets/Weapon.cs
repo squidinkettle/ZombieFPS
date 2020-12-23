@@ -124,6 +124,7 @@ public class Weapon : MonoBehaviour
 
     private void HitEffect(RaycastHit hit)
     {
+       //TODO make sure hit does not instantiate when hitting horizon
         GameObject hitFX= Instantiate(explosion, hit.point,Quaternion.LookRotation(hit.point));
         Destroy(hitFX, 0.2f);
     }
