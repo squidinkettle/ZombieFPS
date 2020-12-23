@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
+
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
+
     Player player;
-    [SerializeField]GameObject canvas;
+    [SerializeField] GameObject canvas;
     // Start is called before the first frame update
     void Start()
     {

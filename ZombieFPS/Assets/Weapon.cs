@@ -125,7 +125,7 @@ public class Weapon : MonoBehaviour
     {
         if (hit.distance == 0) { return; }
 
-        GameObject hitFX= Instantiate(explosion, hit.point,Quaternion.LookRotation(hit.point));
+        GameObject hitFX= Instantiate(explosion, hit.point, Quaternion.LookRotation(hit.point));
         Destroy(hitFX, 0.2f);
     }
 

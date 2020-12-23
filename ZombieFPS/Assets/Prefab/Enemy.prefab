@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 834718825966976174}
   - component: {fileID: 834718825966976169}
   - component: {fileID: 834718825966976168}
-  - component: {fileID: 834718825966976173}
+  - component: {fileID: 861290479}
+  - component: {fileID: 3712795753230018663}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -121,7 +122,26 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &834718825966976173
+--- !u!95 &861290479
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834718825966976171}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 59b242442f9d64e03b6fbe025033591b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3712795753230018663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,13 +150,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 834718825966976171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db5a3539317834470bd1f1003a24439c, type: 3}
+  m_Script: {fileID: 11500000, guid: b70d50b2ff4a54b81a3c3d357a596891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  range: 10
-  damage: 3
-  damageTimer: 1.08
+  turnSpeed: 10
+  range: 20
+  damage: 5
+  damageTimer: 0
+  maxHealth: 50
 --- !u!1 &6352166312628781695
 GameObject:
   m_ObjectHideFlags: 0

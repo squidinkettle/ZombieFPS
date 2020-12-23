@@ -48,10 +48,15 @@ public class TransportCar : MonoBehaviour
     {
         while (true)
         {
-            while(enemiesLeave && enemiesInsideTransport.Count == 0)
+            while(enemiesLeave && enemiesInsideTransport.Count >0)
             {
+                float xOffset = 1f;
+                Vector3 offLoadPos = new Vector3(
+                transform.position.x + xOffset,
+                transform.position.y,
+                transform.position.z);
                 var newEnemy = enemiesInsideTransport.Dequeue();
-                Instantiate(newEnemy, transform);
+                Instantiate(newEnemy, offLoadPos,Quaternion.identity);
 
 
                 yield return new WaitForSeconds(timeLeave);
