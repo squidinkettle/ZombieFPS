@@ -10,16 +10,17 @@ public class CanvasManager : MonoBehaviour
     void Start()
     {
         canvas.SetActive(false);
-        player = FindObjectOfType<Player>();
+   
     }
 
-    // Update is called once per frame
-    void Update()
+  
+    public void HandleDeath()
     {
-        if (player.IsDead)
-        {
-            canvas.SetActive(true);
-        }
-
+        canvas.SetActive(true);
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
+
+
 }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CameraSwitch : MonoBehaviour
 {
-    public GameObject[] objects;
+    public UnityEngine.GameObject[] objects;
     public Text text;
 
     private int m_CurrentActiveObject;

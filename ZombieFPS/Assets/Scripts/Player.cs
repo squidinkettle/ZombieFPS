@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,9 +16,17 @@ public class Player : MonoBehaviour
         set { _health -= value;
             if (_health <= 0) {
                 _isDead = true;
+                CallCanvasManager();
             }
         }
     }
+
+    private void CallCanvasManager()
+    {
+        CanvasManager canvasManager = FindObjectOfType<CanvasManager>();
+        canvasManager.HandleDeath();
+    }
+
     public bool IsDead
     {
         get { return _isDead; }

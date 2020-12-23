@@ -7,7 +7,7 @@ namespace UnityStandardAssets.SceneUtils
     public class PlaceTargetWithMouse : MonoBehaviour
     {
         public float surfaceOffset = 1.5f;
-        public GameObject setTargetOn;
+        public UnityEngine.GameObject setTargetOn;
 
         // Update is called once per frame
         private void Update()

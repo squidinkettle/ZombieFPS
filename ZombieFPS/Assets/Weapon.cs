@@ -50,7 +50,6 @@ public class Weapon : MonoBehaviour
             {
 
                 RaycastHit hit;
-
                 Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range);
                 ShellQueueCicle();
                 muzzle.Play();
@@ -124,7 +123,8 @@ public class Weapon : MonoBehaviour
 
     private void HitEffect(RaycastHit hit)
     {
-       //TODO make sure hit does not instantiate when hitting horizon
+        if (hit.distance == 0) { return; }
+
         GameObject hitFX= Instantiate(explosion, hit.point,Quaternion.LookRotation(hit.point));
         Destroy(hitFX, 0.2f);
     }

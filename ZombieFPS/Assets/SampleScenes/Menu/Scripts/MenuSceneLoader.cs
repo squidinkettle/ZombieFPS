@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class MenuSceneLoader : MonoBehaviour
 {
-    public GameObject menuUI;
+    public UnityEngine.GameObject menuUI;
 
-    private GameObject m_Go;
+    private UnityEngine.GameObject m_Go;
 
 	void Awake ()
 	{
