@@ -13,25 +13,69 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject explosion;
     [SerializeField] float rateOfFire;
     [SerializeField] GameObject shell;
+    [SerializeField] int maxAmmo;
+    int ammo;
+    [SerializeField] int maxClips;
+    int clips;
+    bool isReloading;
     Animator animator;
     bool isFiring;
+
+    [SerializeField] float reloadingTime;
 
     Queue<GameObject> shellQueue=new Queue<GameObject>();
 
     private void Start()
     {
+        ammo = maxAmmo;
+        clips = maxClips;
         animator = GetComponent<Animator>();
         StartCoroutine(Shoot(rateOfFire));
+        StartCoroutine(Reloading(reloadingTime));
+    }
+
+    public int Ammo
+    {
+        get { return ammo; }
+        set { ammo = value; }
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        PlayerInput();
+    }
+
+    private void PlayerInput()
+    {
+        FireWeapon();
+        ReloadWeapon();
+    }
+
+    private void ReloadWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (ammo < maxAmmo)
+            {
+                isReloading = true;
+            }
+        }
+    }
+
+
+
+    private void FireWeapon()
+    {
         if (Input.GetButton("Fire1"))
         {
-            isFiring = true;
-            animator.SetBool("isShooting", true);
+            if (ammo > 0 && !isReloading)
+            {
+                isFiring = true;
+                animator.SetBool("isShooting", true);
+            }
 
         }
         else
@@ -41,6 +85,26 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    IEnumerator Reloading(float reloadTime)
+    {
+
+        while (true)
+        {
+            while (isReloading)
+            {
+
+                yield return new WaitForSeconds(reloadTime);
+                isReloading = false;
+                ammo = maxAmmo;
+                clips--;
+            }
+
+
+
+
+            yield return null;
+        }
+    }
 
     IEnumerator Shoot(float RoF)
     {
@@ -62,6 +126,7 @@ public class Weapon : MonoBehaviour
                     HitEffect(hit);
                 }
                 yield return new WaitForSeconds(RoF);
+                ammo--;
                 animator.SetBool("isShooting", false);
             }
             yield return null;
