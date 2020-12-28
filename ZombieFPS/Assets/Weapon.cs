@@ -13,13 +13,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject explosion;
     [SerializeField] float rateOfFire;
     [SerializeField] GameObject shell;
-    [SerializeField] int maxAmmo;
-    int ammo;
-    [SerializeField] int maxClips;
-    int clips;
     bool isReloading;
     Animator animator;
     bool isFiring;
+
+    Ammo ammunition;
 
     [SerializeField] float reloadingTime;
 
@@ -27,17 +25,12 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        ammo = maxAmmo;
-        clips = maxClips;
+        ammunition = GetComponent<Ammo>();
         animator = GetComponent<Animator>();
         StartCoroutine(Shoot(rateOfFire));
         StartCoroutine(Reloading(reloadingTime));
-    }
 
-    public int Ammo
-    {
-        get { return ammo; }
-        set { ammo = value; }
+
 
     }
 
@@ -58,7 +51,7 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (ammo < maxAmmo)
+            if (ammunition.AmmoNum < ammunition.MaxAmmo && ammunition.Clips>0)
             {
                 isReloading = true;
             }
@@ -71,7 +64,7 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            if (ammo > 0 && !isReloading)
+            if (ammunition.AmmoNum > 0 && !isReloading)
             {
                 isFiring = true;
                 animator.SetBool("isShooting", true);
@@ -95,8 +88,8 @@ public class Weapon : MonoBehaviour
 
                 yield return new WaitForSeconds(reloadTime);
                 isReloading = false;
-                ammo = maxAmmo;
-                clips--;
+                ammunition.AmmoNum = ammunition.MaxAmmo;
+                ammunition.Clips--;
             }
 
 
@@ -126,7 +119,11 @@ public class Weapon : MonoBehaviour
                     HitEffect(hit);
                 }
                 yield return new WaitForSeconds(RoF);
-                ammo--;
+                ammunition.AmmoNum--;
+                if (ammunition.AmmoNum <= 0)
+                {
+                    isFiring = false;
+                }
                 animator.SetBool("isShooting", false);
             }
             yield return null;
