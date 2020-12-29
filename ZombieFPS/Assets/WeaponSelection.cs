@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,42 +7,80 @@ public class WeaponSelection : MonoBehaviour
 {
 
     [SerializeField] List<GameObject> weapons;
-    int index;
+    [SerializeField] int currentWeapon;
+  
+    float currentValue=0;
+    int previousWeapon;
     // Start is called before the first frame update
     void Start()
     {
-        index = 0;
-        
+        for(int x = 1; x < weapons.Count; x++)
+        {
+            weapons[x].SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        var currentValue = Input.GetAxis("MouseScrollWheel");
-        print("current value: "+currentValue+" scroll: "+Input.GetAxis("MouseScrollWheel"));
 
 
-        if (Input.GetAxis("MouseScrollWheel") > currentValue)
-        {
-            UpdateWeapon(-1);
-        }
-        else if (Input.GetAxis("MouseScrollWheel") < currentValue) ;
-        {
-            UpdateWeapon(1);
-        }
+        previousWeapon = currentWeapon;
+        ProcessKeyInput();
+        ProcessScrollWheel();
+
 
     }
 
-    void UpdateWeapon(int n)
+    private void ProcessScrollWheel()
     {
-        print("updating");
-        if (index+1 > weapons.Count) { return; }
-        if (index < 0) { return; }
+        if (Input.GetAxis("MouseScrollWheel") >0)
+        {
+            if (currentWeapon >= weapons.Count-1)
+            {
+                currentWeapon = 0;
+            }
+            else
+            {
+                currentWeapon++;
+            }
+            UpdateWeapon();
+        }
 
-        weapons[index].SetActive(false);
-        index += n;
 
-        weapons[index].SetActive(true);
+        if (Input.GetAxis("MouseScrollWheel") < 0)
+        {
+            if (currentWeapon <= 0)
+            {
+                currentWeapon = weapons.Count-1;
+            }
+            else
+            {
+                currentWeapon--;
+            }
+            UpdateWeapon();
+        }
+    }
+
+    private void ProcessKeyInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            currentWeapon = 0;
+            UpdateWeapon();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            currentWeapon = 1;
+            UpdateWeapon();
+        }
+    }
+
+    void UpdateWeapon()
+    {
+        weapons[previousWeapon].SetActive(false);
+        weapons[currentWeapon].SetActive(true); 
     }
 
 

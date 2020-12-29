@@ -22,6 +22,7 @@ public class CanvasManager : MonoBehaviour
   
     public void HandleDeath()
     {
+        FindObjectOfType<WeaponSelection>().enabled = false;
         canvas.SetActive(true);
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;

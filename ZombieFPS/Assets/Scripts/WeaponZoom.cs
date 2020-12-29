@@ -24,6 +24,10 @@ public class WeaponZoom : MonoBehaviour
         StartCoroutine(SmoothZoom(zoomSpeed));
         
     }
+    private void OnEnable()
+    {
+        StartCoroutine(SmoothZoom(zoomSpeed));
+    }
     IEnumerator SmoothZoom(float speed)
     {
         while (true)

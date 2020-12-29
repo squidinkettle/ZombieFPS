@@ -33,6 +33,11 @@ public class Weapon : MonoBehaviour
 
 
     }
+    private void OnEnable()
+    {
+        StartCoroutine(Shoot(rateOfFire));
+        StartCoroutine(Reloading(reloadingTime));
+    }
 
 
     // Update is called once per frame

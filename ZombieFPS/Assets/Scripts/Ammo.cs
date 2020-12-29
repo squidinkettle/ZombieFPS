@@ -32,6 +32,18 @@ public class Ammo : MonoBehaviour
     }
 
 
+
+
+    [SerializeField] AmmoSlot ammoSlots;
+
+    [System.Serializable]
+    private class AmmoSlot
+    {
+        public AmmoType ammoType;
+        public int ammoAmount;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {

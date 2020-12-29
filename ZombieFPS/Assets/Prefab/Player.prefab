@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 4628719947054035372}
   - component: {fileID: 4628719947047618536}
   - component: {fileID: 9018658884574649133}
+  - component: {fileID: 1911699527}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -315,6 +316,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+--- !u!114 &1911699527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628719947041059338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 613efc8226d934b669ecf6207c19979b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 1702939482082674829}
+  - {fileID: 654631917422105759}
+  currentWeapon: 0
 --- !u!1 &4854931064126664304
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +371,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 265817923170310888}
     m_Modifications:
+    - target: {fileID: 2046651072, guid: 2f2f6487fb5cb422793fc2c29f598e24, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5b2f4f66511c24b828d35407a7558178, type: 2}
     - target: {fileID: 868096094762856167, guid: 2f2f6487fb5cb422793fc2c29f598e24, type: 3}
       propertyPath: m_Name
       value: 'M1911 Handgun_Black '
@@ -416,6 +437,11 @@ PrefabInstance:
       objectReference: {fileID: 4628719947042435116}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f2f6487fb5cb422793fc2c29f598e24, type: 3}
+--- !u!1 &654631917422105759 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 868096094762856167, guid: 2f2f6487fb5cb422793fc2c29f598e24, type: 3}
+  m_PrefabInstance: {fileID: 367501379837475448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &649341238454399721 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 872375496300267665, guid: 2f2f6487fb5cb422793fc2c29f598e24, type: 3}
@@ -490,6 +516,11 @@ PrefabInstance:
       objectReference: {fileID: 4628719947047618536}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b67c73c57fcb64c31b067e01adaca46f, type: 3}
+--- !u!1 &1702939482082674829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4833441625780046906, guid: b67c73c57fcb64c31b067e01adaca46f, type: 3}
+  m_PrefabInstance: {fileID: 6102900740159849655}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1702939482082317485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4833441625779949594, guid: b67c73c57fcb64c31b067e01adaca46f, type: 3}
