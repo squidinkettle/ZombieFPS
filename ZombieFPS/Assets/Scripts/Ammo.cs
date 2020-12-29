@@ -10,6 +10,9 @@ public class Ammo : MonoBehaviour
     [SerializeField] int maxClips;
     private int _clips;
 
+
+
+
     public int MaxAmmo
     {
         get { return maxAmmo; }
@@ -34,14 +37,21 @@ public class Ammo : MonoBehaviour
 
 
 
-    [SerializeField] AmmoSlot ammoSlots;
+    [SerializeField] AmmoSlot[] ammoSlots;
 
     [System.Serializable]
     private class AmmoSlot
     {
         public AmmoType ammoType;
-        public int ammoAmount;
+        public int maxAmmo;
+        public int maxClips;
     }
+
+
+
+
+
+
 
 
     // Start is called before the first frame update

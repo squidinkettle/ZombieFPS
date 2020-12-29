@@ -18,6 +18,7 @@ public class Weapon : MonoBehaviour
     bool isFiring;
 
     Ammo ammunition;
+    [SerializeField]AmmoType ammoType;
 
     [SerializeField] float reloadingTime;
 
