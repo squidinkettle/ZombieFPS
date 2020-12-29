@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2568ce18ea7a4462fac077999e3ae6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAi: {fileID: 0}
+  enemyAi: {fileID: 834718825966976171, guid: ae0d35212e1b248fdb8e792fd6c8e074, type: 3}
   numberOfEnemies: 10
   player: {fileID: 0}
   timeEnemiesLeave: 1
