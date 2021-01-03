@@ -14,19 +14,24 @@ public class WeaponZoom : MonoBehaviour
     [SerializeField] RigidbodyFirstPersonController fpsController;
 
 
-    bool isZoomed=true;
+    bool isZoomed=false;
 
 
     // Start is called before the first frame update
     void Start()
     {
 
-        StartCoroutine(SmoothZoom(zoomSpeed));
+        //StartCoroutine(SmoothZoom(zoomSpeed));
         
     }
     private void OnEnable()
     {
+        isZoomed = false;
         StartCoroutine(SmoothZoom(zoomSpeed));
+    }
+    private void OnDisable()
+    {
+        FPScamera.fieldOfView = zoomOut;
     }
     IEnumerator SmoothZoom(float speed)
     {

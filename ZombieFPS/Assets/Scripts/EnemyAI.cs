@@ -53,13 +53,18 @@ public class EnemyAI : MonoBehaviour
 
     void StartDeath()
     {
+
         if (_health <= 0)
         {
+            animator.Play("Base Layer.Dead");
+            Destroy(GetComponent<CapsuleCollider>());
+            navMeshAgent.isStopped = true;
             isDead = true;
-            Destroy(gameObject.GetComponent<Animator>());
-            Destroy(gameObject.GetComponent<NavMeshAgent>());
-            Rigidbody rigidbody;
-            rigidbody = gameObject.AddComponent<Rigidbody>();
+            animator.SetBool("isDead", true);
+            animator.SetBool("idle", false);
+            animator.SetBool("moving", false);
+            animator.SetBool("attack", false);
+
             Destroy(gameObject,5f);
         }
     }
@@ -101,12 +106,14 @@ public class EnemyAI : MonoBehaviour
 
     private void EngageTarget()
     {
+        if (isDead) { return; }
         Chase();
 
     }
 
     private void Chase()
     {
+        if (isDead) { return; }
         animator.SetBool("moving", true);
     
         navMeshAgent.SetDestination(moveObjective);
@@ -126,6 +133,7 @@ public class EnemyAI : MonoBehaviour
         else
         {
             canAttack = false;
+            animator.SetBool("attack", false);
         }
     }
 
@@ -154,7 +162,7 @@ public class EnemyAI : MonoBehaviour
         {
             while (animator!=null && canAttack)
             {
-
+                if (isDead) { break; }
                 animator.SetBool("attack", true);
                 animator.SetBool("moving", false);
                 target.GetComponent<Player>().Health = damage;

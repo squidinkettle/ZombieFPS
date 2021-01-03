@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject explosion;
     [SerializeField] float rateOfFire;
     [SerializeField] GameObject shell;
-    bool isReloading;
+    bool isReloading=false;
     Animator animator;
     bool isFiring;
 
@@ -26,10 +26,10 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        ammunition = GetComponent<Ammo>();
+        ammunition = FindObjectOfType<Ammo>();
         animator = GetComponent<Animator>();
-        StartCoroutine(Shoot(rateOfFire));
-        StartCoroutine(Reloading(reloadingTime));
+        //StartCoroutine(Shoot(rateOfFire));
+        //StartCoroutine(Reloading(reloadingTime));
 
 
 
@@ -57,7 +57,7 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (ammunition.AmmoNum < ammunition.MaxAmmo && ammunition.Clips>0)
+            if (ammunition.GetCurrentAmmo(ammoType) < ammunition.GetMaxAmmo(ammoType) && ammunition.GetClips(ammoType)>=0)
             {
                 isReloading = true;
             }
@@ -70,7 +70,7 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            if (ammunition.AmmoNum > 0 && !isReloading)
+            if (ammunition.GetCurrentAmmo(ammoType) > 0 && !isReloading)
             {
                 isFiring = true;
                 animator.SetBool("isShooting", true);
@@ -94,8 +94,9 @@ public class Weapon : MonoBehaviour
 
                 yield return new WaitForSeconds(reloadTime);
                 isReloading = false;
-                ammunition.AmmoNum = ammunition.MaxAmmo;
-                ammunition.Clips--;
+                var maxAmmo = ammunition.GetMaxAmmo(ammoType);
+                ammunition.ReloadCurrentAmmo(ammoType, maxAmmo);
+
             }
 
 
@@ -111,7 +112,6 @@ public class Weapon : MonoBehaviour
         {
             while (isFiring)
             {
-
                 RaycastHit hit;
                 Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range);
                 ShellQueueCicle();
@@ -125,8 +125,8 @@ public class Weapon : MonoBehaviour
                     HitEffect(hit);
                 }
                 yield return new WaitForSeconds(RoF);
-                ammunition.AmmoNum--;
-                if (ammunition.AmmoNum <= 0)
+                ammunition.SetCurrentAmmo(ammoType);
+                if (ammunition.GetCurrentAmmo(ammoType) <= 0)
                 {
                     isFiring = false;
                 }
@@ -192,6 +192,7 @@ public class Weapon : MonoBehaviour
     private void HitEffect(RaycastHit hit)
     {
         if (hit.distance == 0) { return; }
+        if (hit.collider.GetComponent<EnemyAI>()) { return; }
 
         GameObject hitFX= Instantiate(explosion, hit.point, Quaternion.LookRotation(hit.point));
         Destroy(hitFX, 0.2f);
